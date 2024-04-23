@@ -7,7 +7,7 @@ kubernetes:
         #% if item.controller %#
         "#{ item.name }#":
           ansible_user: "#{ item.ssh_user }#"
-          ansible_host: "#{ item.address }#"
+          ansible_host: "#{ item.address_host }#"
           #% if item.ssh_key %#
           ansible_ssh_private_key_file: "#{ item.ssh_key }#"
           #% endif %#
@@ -20,7 +20,7 @@ kubernetes:
         #% if not item.controller %#
         "#{ item.name }#":
           ansible_user: "#{ item.ssh_user }#"
-          ansible_host: "#{ item.address }#"
+          ansible_host: "#{ item.address_host }#"
           #% if item.ssh_key %#
           ansible_ssh_private_key_file: "#{ item.ssh_key }#"
           #% endif %#

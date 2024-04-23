@@ -48,7 +48,7 @@ nodes:
           - vlanId: #{ bootstrap_talos.vlan }#
             addresses:
               - "#{ item.address }#/#{ bootstrap_node_network.split('/') | last }#"
-            mtu: 1500
+            mtu: 1400
             routes:
               - network: 0.0.0.0/0
                 #% if bootstrap_node_default_gateway %#

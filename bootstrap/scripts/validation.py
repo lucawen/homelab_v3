@@ -69,10 +69,11 @@ def validate_node(node: dict, node_cidr: str, distribution: str) -> None:
     ip = validate_ip(node.get("address"))
     if netaddr.IPAddress(ip, 4) not in netaddr.IPNetwork(node_cidr):
         raise ValueError(f"Node {node.get('name')} is not in the node CIDR {node_cidr}")
+    ip_public = validate_ip(node.get("address_host"))
     port = 50000 if distribution in ["talos"] else 22
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.settimeout(5)
-        result = sock.connect_ex((ip, port))
+        result = sock.connect_ex((ip_public, port))
         if result != 0:
             raise ValueError(f"Node {node.get('name')} port {port} is not open")
 
