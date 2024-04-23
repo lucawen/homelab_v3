@@ -32,7 +32,7 @@ nodes:
         vlans:
           - vlanId: 4020
             addresses:
-              - "192.168.1.2/24"
+              - "178.63.65.43/24"
             mtu: 1400
             routes:
               - network: 0.0.0.0/0
