@@ -24,7 +24,7 @@ cniConfig:
 nodes:
   #% for item in bootstrap_node_inventory %#
   - hostname: "#{ item.name }#"
-    ipAddress: "#{ item.address_host }#"
+    ipAddress: "#{ item.address }#"
     #% if item.talos_disk.startswith('/') %#
     installDisk: "#{ item.talos_disk }#"
     #% else %#
@@ -63,7 +63,6 @@ nodes:
         #% else %#
         addresses:
           - "#{ item.address }#/#{ bootstrap_node_network.split('/') | last }#"
-          - "#{ item.address_host }#/#{ bootstrap_node_network.split('/') | last }#"
         mtu: 1500
         routes:
           - network: 0.0.0.0/0

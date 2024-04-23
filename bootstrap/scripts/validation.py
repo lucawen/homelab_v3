@@ -67,13 +67,12 @@ def validate_node(node: dict, node_cidr: str, distribution: str) -> None:
         if not re.match(r"(?:[0-9a-fA-F]:?){12}", node.get("talos_nic")):
             raise ValueError(f"Node {node.get('name')} has an invalid talos_nic, is this a MAC address?")
     ip = validate_ip(node.get("address"))
-    if netaddr.IPAddress(ip, 4) not in netaddr.IPNetwork(node_cidr):
-        raise ValueError(f"Node {node.get('name')} is not in the node CIDR {node_cidr}")
-    ip_public = validate_ip(node.get("address_host"))
+    # if netaddr.IPAddress(ip, 4) not in netaddr.IPNetwork(node_cidr):
+    #     raise ValueError(f"Node {node.get('name')} is not in the node CIDR {node_cidr}")
     port = 50000 if distribution in ["talos"] else 22
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.settimeout(5)
-        result = sock.connect_ex((ip_public, port))
+        result = sock.connect_ex((ip, port))
         if result != 0:
             raise ValueError(f"Node {node.get('name')} port {port} is not open")
 
